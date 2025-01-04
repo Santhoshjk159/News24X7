@@ -1,4 +1,7 @@
 # 📰 **News 24X7**  
+![image](https://github.com/user-attachments/assets/1fa8e38b-7fc5-4cda-a475-76b177ac860e)
+![image](https://github.com/user-attachments/assets/a79d432a-2dd4-488c-9f14-08b473f16d56)
+
 
 **Welcome to News 24X7**  
 Your trusted source for breaking news and real-time updates.  
