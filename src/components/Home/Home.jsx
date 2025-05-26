@@ -7,13 +7,8 @@ const Home = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=9cb02ee28139471e8bc874618183c29d`;
-
-        const corsProxy = "https://corsproxy.io/?";
-        const finalUrl =
-          window.location.hostname === "localhost" ? url : corsProxy + url;
-
-        const response = await fetch(finalUrl);
+        const url = `https://saurav.tech/NewsAPI/top-headlines/category/general/us.json`;
+        const response = await fetch(url);
         const data = await response.json();
 
         setNews(data.articles?.slice(0, 6) || []);

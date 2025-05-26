@@ -52,47 +52,45 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    if (searchQuery.trim().length === 0) {
-      fetchArticles();
-    }
+    if (searchQuery.trim().length === 0) fetchArticles();
   }, [activeCategory, sortOption]);
 
   useEffect(() => {
-    if (searchQuery.trim().length > 0) {
-      fetchArticles();
-    }
+    if (searchQuery.trim().length > 0) fetchArticles();
   }, [searchQuery, sortOption]);
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-100 text-gray-800">
       {/* Header */}
-      <header className="bg-red-600 text-white p-4">
-        <h1 className="text-2xl font-bold text-center">News Portal</h1>
+      <header className="bg-gradient-to-r from-red-600 to-red-800 text-white py-6 shadow-md">
+        <h1 className="text-3xl font-bold text-center tracking-tight">
+          News 24X7 Portal
+        </h1>
+        <p className="text-center text-sm opacity-90">
+          Stay updated with real-time news across categories
+        </p>
       </header>
 
-      {/* Search and Sort Options */}
-      <div className="p-4">
-        <div className="flex justify-between items-center mb-4">
-          {/* Search */}
+      {/* Search + Sort Controls */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex flex-col md:flex-row items-center gap-4">
           <input
             type="text"
             placeholder="Search for news..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2 w-2/3"
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500"
           />
           <button
             onClick={fetchArticles}
-            className="ml-4 bg-red-600 text-white px-4 py-2 rounded-lg"
+            className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition"
           >
             Search
           </button>
-
-          {/* Sort */}
           <select
             value={sortOption}
             onChange={(e) => setSortOption(e.target.value)}
-            className="border border-gray-300 rounded-lg p-2"
+            className="border border-gray-300 rounded-lg px-4 py-2 shadow-sm"
           >
             <option value="publishedAt">Latest</option>
             <option value="relevancy">Most Relevant</option>
@@ -100,17 +98,17 @@ const HomePage = () => {
           </select>
         </div>
 
-        {/* Categories */}
+        {/* Category Buttons */}
         {searchQuery.trim().length === 0 && (
-          <div className="flex space-x-4 overflow-x-auto">
+          <div className="flex flex-wrap justify-center mt-6 gap-3">
             {categories.map((category) => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-lg ${
+                className={`px-4 py-2 rounded-full font-medium transition ${
                   activeCategory === category
                     ? "bg-red-600 text-white"
-                    : "bg-gray-300"
+                    : "bg-gray-200 text-gray-800 hover:bg-red-100"
                 }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -120,41 +118,43 @@ const HomePage = () => {
         )}
       </div>
 
-      {/* News Articles */}
-      <div className="p-4">
+      {/* Articles Grid */}
+      <div className="container mx-auto px-4 pb-16">
         {loading ? (
-          <p className="text-center text-gray-600">Loading news...</p>
+          <p className="text-center text-gray-600 text-lg">Loading news...</p>
         ) : articles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article, index) => (
               <div
                 key={index}
-                className="bg-white shadow-lg rounded-lg p-4 flex flex-col"
+                className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
               >
-                {article.urlToImage && (
-                  <img
-                    src={article.urlToImage}
-                    alt={article.title}
-                    className="rounded-t-lg w-full h-48 object-cover"
-                  />
-                )}
-                <h2 className="text-lg font-bold mt-4">{article.title}</h2>
-                <p className="text-gray-600 text-sm mt-2">
-                  {article.description}
-                </p>
-                <a
-                  href={article.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto text-red-600 font-bold"
-                >
-                  Read More
-                </a>
+                <img
+                  src={article.urlToImage}
+                  alt={article.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-5 flex flex-col flex-grow">
+                  <h2 className="text-lg font-semibold mb-2 line-clamp-2">
+                    {article.title}
+                  </h2>
+                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">
+                    {article.description}
+                  </p>
+                  <a
+                    href={article.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto text-red-600 font-medium hover:underline"
+                  >
+                    Read More →
+                  </a>
+                </div>
               </div>
             ))}
           </div>
         ) : (
-          <p className="text-center text-gray-600">
+          <p className="text-center text-gray-600 text-lg">
             No articles found for your search.
           </p>
         )}
