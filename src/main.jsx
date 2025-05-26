@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import "./index.css";
 import {
   Route,
@@ -8,13 +7,11 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import Layout from "./layout.jsx";
 import Home from "./components/Home/Home.jsx";
 import Category from "./components/Category/Category.jsx";
 import Contact from "./components/Contact/Contact.jsx";
-
-// ✅ Set your actual GitHub repo name here
-const repoName = "News24X7";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,7 +22,7 @@ const router = createBrowserRouter(
     </Route>
   ),
   {
-    basename: `/${repoName}`, // 👈 Required for GitHub Pages
+    basename: "/News24X7", // 👈 This is crucial
   }
 );
 
