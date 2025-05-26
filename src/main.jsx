@@ -22,7 +22,7 @@ const router = createBrowserRouter(
     </Route>
   ),
   {
-    basename: "/News24X7",
+    basename: import.meta.env.PROD ? "/News24X7" : "/",,
   }
 );
 
