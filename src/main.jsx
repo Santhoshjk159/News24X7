@@ -22,7 +22,7 @@ const router = createBrowserRouter(
     </Route>
   ),
   {
-    basename: "/News24X7", // 👈 This is crucial
+    basename: "/News24X7", 
   }
 );
 
