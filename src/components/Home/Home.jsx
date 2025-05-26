@@ -4,21 +4,26 @@ const Home = () => {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch breaking news from a free API
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await fetch(
-          "https://newsapi.org/v2/top-headlines?country=us&apiKey=9cb02ee28139471e8bc874618183c29d" //869fc8ed9bce466e976b9d45fac51af6
-        ); // Replace 'YOUR_API_KEY' with your actual NewsAPI key
+        const url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=9cb02ee28139471e8bc874618183c29d`;
+
+        const corsProxy = "https://corsproxy.io/?";
+        const finalUrl =
+          window.location.hostname === "localhost" ? url : corsProxy + url;
+
+        const response = await fetch(finalUrl);
         const data = await response.json();
-        setNews(data.articles.slice(0, 6)); // Fetch top 6 news articles
+
+        setNews(data.articles?.slice(0, 6) || []);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching news:", error);
         setLoading(false);
       }
     };
+
     fetchNews();
   }, []);
 
