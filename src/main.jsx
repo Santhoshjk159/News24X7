@@ -18,9 +18,12 @@ const router = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route path="" element={<Home />} />
       <Route path="Category/" element={<Category />} />
-      <Route path="Contact/" element={<Contact />}/>
+      <Route path="Contact/" element={<Contact />} />
     </Route>
-  )
+  ),
+  {
+    basename: 'News24X7',
+  }
 );
 
 ReactDOM.createRoot(document.getElementById("root")).render(
